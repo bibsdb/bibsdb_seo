@@ -12,4 +12,5 @@ features[metatag][] = node:ding_event
 features[metatag][] = node:ding_news
 features[metatag][] = node:ding_page
 features[metatag][] = node:new_materials
+mtime = 1479465583
 project path = sites/default/modules
