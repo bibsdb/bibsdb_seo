@@ -1,0 +1,15 @@
+name = Bibsdb SEO
+core = 7.x
+package = Bibsdb
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = metatag
+features[context][] = metatags_noindex_follow
+features[ctools][] = context:context:3
+features[features_api][] = api:2
+features[metatag][] = global
+features[metatag][] = node:ding_event
+features[metatag][] = node:ding_news
+features[metatag][] = node:ding_page
+features[metatag][] = node:new_materials
+project path = sites/default/modules
