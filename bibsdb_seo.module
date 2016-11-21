@@ -6,6 +6,26 @@
 
 include_once 'bibsdb_seo.features.inc';
 
+/**
+ * Implements hook_ctools_render_alter. 
+ * Fill in breadcrumbs on all pages above content.
+ * Strange hook I don't quite understand, but it works.
+ */
+function bibsdb_seo_ctools_render_alter(&$info, &$page, &$context) {
+		
+	$vars = array();
+	$vars['breadcrumb'] = drupal_get_breadcrumb();
+
+	$breadcrumb = theme('breadcrumb', $vars);
+
+	// The hook is called twice for each page. This seems to pick the right invocation.
+	if(!($info['no_blocks'])) {
+		$info['content'] = $breadcrumb . $info['content'];
+	}
+
+}
+
+
 
 /**
  * Implements hook_node_presave. 
