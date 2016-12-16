@@ -10,17 +10,32 @@ include_once 'bibsdb_seo.features.inc';
  * Implements hook_ctools_render_alter. 
  * Fill in breadcrumbs on all pages above content.
  * Strange hook I don't quite understand, but it works.
+ * hook_page_alter can't be used because og panels_everywhere
  */
 function bibsdb_seo_ctools_render_alter(&$info, &$page, &$context) {
-		
-	$vars = array();
-	$vars['breadcrumb'] = drupal_get_breadcrumb();
-
-	$breadcrumb = theme('breadcrumb', $vars);
 
 	// The hook is called twice for each page. This seems to pick the right invocation.
 	if(!($info['no_blocks'])) {
-		$info['content'] = $breadcrumb . $info['content'];
+
+	  // Invoke the path_breadcrumbs building system
+	  // The Path breadcrumbs module does it in hook_page_alter and it has no effect
+		path_breadcrumbs_set_breadcrumb();
+		
+		// the rendered breadcrumbs
+		$vars = array();
+		$vars['breadcrumb'] = drupal_get_breadcrumb();
+		$breadcrumb = theme('breadcrumb', $vars);
+
+
+		$wrapper = array(
+			'#type' => 'container',
+			'#attributes' => array(
+				'class' => array('hallo'),
+				),
+			);
+
+		$info['content'] = "<div class=\"breadcrumb-wrapper\">" . $breadcrumb . "</div>" . $info['content'];
+
 	}
 
 }
@@ -36,22 +51,22 @@ function bibsdb_seo_ctools_render_alter(&$info, &$page, &$context) {
 function bibsdb_seo_node_presave($node) {
 
   // Pages of with taxonomy term "Inspirationsliste" must be excluded from the xmlsitemap
-  if ('ding_page' == $node->type) {
-    $tid = 61;
-    $wrapper = entity_metadata_wrapper('node', $node);
+	if ('ding_page' == $node->type) {
+		$tid = 61;
+		$wrapper = entity_metadata_wrapper('node', $node);
 
     // Set the defaults
-    $node->xmlsitemap['status'] = 1;
-    $node->xmlsitemap['status_override'] = 0;
+		$node->xmlsitemap['status'] = 1;
+		$node->xmlsitemap['status_override'] = 0;
 
     // Change if inspirationsliste
-    foreach ($wrapper->field_ding_page_tags->getIterator() as $delta => $term_wrapper) {
-      if ( $term_wrapper->getIdentifier() == $tid) {
-        $node->xmlsitemap['status'] = 0;
-        $node->xmlsitemap['status_override'] = 1;
-      }
-    } 
-  }
+		foreach ($wrapper->field_ding_page_tags->getIterator() as $delta => $term_wrapper) {
+			if ( $term_wrapper->getIdentifier() == $tid) {
+				$node->xmlsitemap['status'] = 0;
+				$node->xmlsitemap['status_override'] = 1;
+			}
+		} 
+	}
 }
 
 
@@ -62,20 +77,20 @@ function bibsdb_seo_node_presave($node) {
 
 function bibsdb_expose_pathauto_alias_alter(&$alias, array &$context) {
 
-  $tid = 61;
+	$tid = 61;
 
   // Limit to node entity type
-  if ($context['module'] == 'node') {
-    $node = $context['data']['node'];
-    $wrapper = entity_metadata_wrapper('node', $node);
+	if ($context['module'] == 'node') {
+		$node = $context['data']['node'];
+		$wrapper = entity_metadata_wrapper('node', $node);
 
     // Limit to ding_pages that is tagged with "inspirationsliste"
-    if ($node->type == 'ding_page') {
-      foreach ($wrapper->field_ding_page_tags->getIterator() as $delta => $term_wrapper) {
-        if ( $term_wrapper->getIdentifier() == $tid) {
-          $alias = str_replace('indhold/', 'dbcliste/', $alias);
-        }
-      }
-    }
-  }
+		if ($node->type == 'ding_page') {
+			foreach ($wrapper->field_ding_page_tags->getIterator() as $delta => $term_wrapper) {
+				if ( $term_wrapper->getIdentifier() == $tid) {
+					$alias = str_replace('indhold/', 'dbcliste/', $alias);
+				}
+			}
+		}
+	}
 }
