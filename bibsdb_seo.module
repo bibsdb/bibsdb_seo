@@ -13,31 +13,23 @@ include_once 'bibsdb_seo.features.inc';
  * hook_page_alter can't be used because og panels_everywhere
  */
 function bibsdb_seo_ctools_render_alter(&$info, &$page, &$context) {
-
 	// The hook is called twice for each page. This seems to pick the right invocation.
 	if(!($info['no_blocks'])) {
 
-	  // Invoke the path_breadcrumbs building system
-	  // The Path breadcrumbs module does it in hook_page_alter and it has no effect
+    // Invoke the path_breadcrumbs building system
+    // The Path breadcrumbs module does it in hook_page_alter and it has no effect
 		path_breadcrumbs_set_breadcrumb();
-		
-		// the rendered breadcrumbs
+
+    // the rendered breadcrumbs
 		$vars = array();
 		$vars['breadcrumb'] = drupal_get_breadcrumb();
 		$breadcrumb = theme('breadcrumb', $vars);
 
 
-		$wrapper = array(
-			'#type' => 'container',
-			'#attributes' => array(
-				'class' => array('hallo'),
-				),
-			);
+		$content = (is_array($info['content'])) ? drupal_render($info['content']) : $info['content'];
 
-		$info['content'] = "<div class=\"breadcrumb-wrapper\">" . $breadcrumb . "</div>" . $info['content'];
-
+    $info['content'] = "<div class=\"breadcrumb-wrapper\">" . $breadcrumb . "</div>" . $content;
 	}
-
 }
 
 
