@@ -512,11 +512,11 @@ function bibsdb_seo_path_breadcrumbs_settings_info() {
   $path_breadcrumb = new stdClass();
   $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'paa_nettet';
-  $path_breadcrumb->name = 'Paa nettet';
+  $path_breadcrumb->name = 'E-bøger og medier';
   $path_breadcrumb->path = 'node/%node';
   $path_breadcrumb->data = array(
     'titles' => array(
-      0 => 'På nettet',
+      0 => 'E-bøger og medier',
       1 => '%node:title',
     ),
     'paths' => array(
