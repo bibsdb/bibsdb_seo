@@ -330,5 +330,15 @@ function bibsdb_seo_metatag_export_default() {
     ),
   );
 
+  // Exported Metatag config instance: taxonomy_term:event_category.
+  $config['taxonomy_term:event_category'] = array(
+    'instance' => 'taxonomy_term:event_category',
+    'config' => array(
+      'title' => array(
+        'value' => '[term:name] | Forår 2017 | [site:name]',
+      ),
+    ),
+  );
+
   return $config;
 }
