@@ -337,6 +337,9 @@ function bibsdb_seo_metatag_export_default() {
       'title' => array(
         'value' => '[term:name] | Forår 2017 | [site:name]',
       ),
+      'canonical' => array(
+        'value' => '[term:url]',
+      ),
     ),
   );
 
