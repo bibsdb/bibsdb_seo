@@ -120,7 +120,7 @@ function bibsdb_seo_context_default_contexts() {
       'metatags' => array(
         'und' => array(
           'title' => array(
-            'value' => 'Oplevelser og aktiviteter | Forår 2017 | [site:name]',
+            'value' => 'Det sker i Sønderborg - Oplevelser og aktiviteter 2017 | [site:name]',
           ),
         ),
       ),

@@ -38,5 +38,5 @@ features[path_breadcrumbs][] = reserveringer
 features[path_breadcrumbs][] = s_geresultat
 features[path_breadcrumbs][] = s_gning_p_hjemmsiden
 features[path_breadcrumbs][] = ting_object
-mtime = 1484570131
+mtime = 1484731022
 project path = sites/default/modules
