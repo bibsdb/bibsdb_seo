@@ -335,7 +335,7 @@ function bibsdb_seo_metatag_export_default() {
     'instance' => 'taxonomy_term:event_category',
     'config' => array(
       'title' => array(
-        'value' => '[term:name] | Forår 2017 | [site:name]',
+        'value' => '[term:name] | Efterår 2017 | [site:name]',
       ),
       'canonical' => array(
         'value' => '[term:url]',

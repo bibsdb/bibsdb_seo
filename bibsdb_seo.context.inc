@@ -74,7 +74,7 @@ function bibsdb_seo_context_default_contexts() {
       'metatags' => array(
         'und' => array(
           'title' => array(
-            'value' => 'Alle arrangementer for voksne | Forår 2017 | [site:name]',
+            'value' => 'Alle arrangementer for voksne | Efterår 2017 | [site:name]',
           ),
           'robots' => array(
             'value' => array(
